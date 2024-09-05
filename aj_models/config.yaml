@@ -1,0 +1,16 @@
+mouse: '59'
+date: '070623'
+
+ark_order: 4  # same as num_lags, train_start is ark_order + 1, interp_len is ark_order - 1
+
+rank_dim: 502
+state_dim: 502
+input_dim: 502
+num_neurons: 502
+
+init_toggle: 'on'
+batch_size: 2000  # how many samples/t's/indices per batch to load in DataLoader
+normalize: 1000 # TODO: ??? why normalize or divide by 1000, probably related to rollout or steady state length
+epochs: 100
+learning_rate: 0.00001
+lambda_val: 0.001

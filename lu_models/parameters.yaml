@@ -1,0 +1,43 @@
+# Data-specific parameters
+dataset_name              : "optogenetic_motor_data_shuffle_prediction_photostim_stim_input_simple_model"
+run_name                  : "photostim_motor_andrew_data_g_512_window_size_24_mse_1024_0325"
+
+# Model parameters
+g_dim                     : 512
+u_dim                     : 32
+g0_encoder_dim            : 8
+c_encoder_dim             : 512
+controller_dim            : 512
+time_window               : 24
+g0_prior_kappa            : 1.0
+u_prior_kappa             : 1.0
+keep_prob                 : 1.0
+clip_val                  : 1.0
+max_norm                  : 1
+use_controller_feedback   : False
+learned_init              : False
+loss_form                 : 'MSE'
+stim_form                 : 'neuron'
+stim_constant_train       : False
+
+
+# Optimizer parameters
+max_epoch                 : 4000
+batch_size                : 100
+learning_rate             : 0.001
+learning_rate_min         : 0.00001
+learning_rate_decay       : 0.999
+scheduler_on              : true
+scheduler_patience        : 6
+scheduler_cooldown        : 6
+kl_weight_schedule_start  : 10000
+kl_weight_schedule_dur    : 20000
+kl_weight_scale           : 1.0
+l2_weight_schedule_start  : 0
+l2_weight_schedule_dur    : 20000
+l2_weight_scale           : 10.0
+untarget_weight           : 1.0
+epsilon                   : 0.1
+betas                     : !!python/tuple [0.9, 0.99]
+l2_gen_scale              : 2000
+l2_con_scale              : 0
