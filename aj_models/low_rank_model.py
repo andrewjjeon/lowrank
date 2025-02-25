@@ -257,7 +257,9 @@ def train_model(model, train_loader, val_loader, epochs=100, lr=0.01, clip_value
         reg_train_loss = 0
         total_l2_penalty = 0
 
+        # X_history and U_history are (4, 2000), X_next is (1, 2000)
         for X_history, U_history, X_next in train_loader:  # loop through 12 train batches in train_loader
+
             # print(f"X_history[0] shape is {len(X_history[0])} there are 4 of these")
             # print(f"U_history[0] shape is {len(U_history[0])} there are 4 of these")
             # print(f"X_next shape is {len(X_next)}")
@@ -310,6 +312,7 @@ def train_model(model, train_loader, val_loader, epochs=100, lr=0.01, clip_value
         with torch.no_grad():
             for X_history, U_history, X_next in val_loader:  # loop through 4 val batches of 2000 in val_loader
                 predictions = model(X_history, U_history)
+                # print(f"the shape of predictions is {len(predictions)}")
                 loss = criterion(predictions, X_next)
                 total_val_loss += loss.item()
 
@@ -370,11 +373,16 @@ def low_rank_svd_components_approximation(A, r):
     # Perform Singular Value Decomposition
     A_r = A - np.diag(np.diag(A))  #A_r is A with diagonal elements 0'ed out
     U, s, Vt = np.linalg.svd(A_r, full_matrices=False)
+    # print(f"shape of U, s, Vt is {U.shape}, {s.shape}, {Vt.shape}")
     # Keep only the top r singular values (and corresponding vectors)
     Ur = U[:, :r]  # top r U vectors
+    # print(f"shape of Ur is {Ur.shape}")
     Sr = np.diag(s[:r])  # vector of the top r singular values
+    # print(f"shape of Sr is {len(Sr)}")
     Vtr = Vt[:r, :]  # top r V vectors
+    # print(f"shape of Vtr is {Vtr.shape}")
 
+    # print(f"shape of np.dot(Sr, Vtr) is {np.dot(Sr, Vtr).shape}")
     # Reconstruct the low-rank approximation of the matrix
     Ar = np.dot(Ur, np.dot(Sr, Vtr))
     return np.diag(A), Ur, np.dot(Sr, Vtr).T, Ar

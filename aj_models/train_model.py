@@ -105,6 +105,9 @@ for i in range(num_lags):
     diag_alpha, Wu, Wv, W_low = low_rank_svd_components_approximation(  # Wv and Bv are the V vectors multiplied with the singular values
         Ahat[:, num_neurons * (i) :num_neurons * (i+1)], rank_dim)
     
+    # print(f"diag_alpha shape is {diag_alpha.shape}")
+    # print(f"Wu shape is {Wu.shape}")
+    # print(f"Wv shape is {Wv.shape}")
     # calculate the low_rank_svd components for the 4 (502,502) 
     # (502=neuron state of x_next, 2008:2510, 2510:3012, 3012:3514, 3514:4016 previous inputs u_session 
     diag_beta, Bu, Bv, B_low = low_rank_svd_components_approximation(
@@ -143,6 +146,7 @@ dataset = TimeseriesDataset(X, U, num_lags)
 
 # Split the dataset only if they are valid training and test indices (if the indices have 4 consecutive 1's for training and 0's for test)
 train_subset, val_subset = split_dataset(dataset, train_indices[train_start:], num_lags)
+print(f"shape of val subset is {len(val_subset)}")
 train_loader = DataLoader(train_subset, batch_size=batch_size, shuffle=True)  # 12 length 24000/2000 ~ 22968 training t's
 val_loader = DataLoader(val_subset, batch_size=batch_size, shuffle=False)  # 4 length 8000/2000 ~ 6340 test t's
 

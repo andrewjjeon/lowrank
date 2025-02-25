@@ -162,7 +162,7 @@ for t in range(train_indices.shape[0]):
         #if t is within ark_order of segment start, add it to x_past, which should be (2008,) at end of ark_order
             x_past.append(y_session_interp[t,:].copy().flatten()/normalize)
         
-        #if not new_segment, and if t is outside current segment
+        #if not new_segment, and if t is outside current ark_interval
         else:
             z = np.array(x_past).flatten()  # z should be (2008,)
             z = np.concatenate((z,u_session[t-ark_order:t,:].copy().flatten(),np.ones(1)))  # z should now be (4017,)
