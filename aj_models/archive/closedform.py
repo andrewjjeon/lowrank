@@ -18,7 +18,7 @@ from torch.optim.lr_scheduler import StepLR
 from pathlib import Path
 from scipy.stats import norm
 import statistics
-from low_rank_model import (
+from aj_models.archive.low_rank_model import (
     to_np, filter_indices_with_lags, split_dataset, TimeseriesDataset, 
     singular_value_norm, LinearDynamicModel, LowRankLinearDynamicModel, 
     train_model, low_rank_svd_components_approximation, diag_off_diag_extraction, 
