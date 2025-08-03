@@ -37,7 +37,10 @@ This project used experimental data where a region of a mice brain was photostim
 
 The project’s active learning technique takes advantage of the low-rank structure of the neural population dynamics to determine the most informative photostimulation patterns. It uses SVD to create low rank autoregressive models that predict neural activity (spikes). These are the models I experimented on. I tuned hyperparameters such as Lambda (L2 Regularization strength), Epochs, Learning Rate, Weight Initialization, k (number of autoregressive time steps used) with cross-validation loops. My best model resulted in a 25% improvement in performance (MSE) over the baselines the team had before I came on.
 <div style="text-align:center">
-  <img src="media/mse_improvement.png" width="250" style="vertical-align: top; margin-right:20px;" />
-  <img src="media/lowrank_reg.png" width="500" style="vertical-align: top;" />
+  <img src="lowrank/mse_improvement.png" width="250" style="vertical-align: top; margin-right:20px;" />
+  <img src="lowrank/roc_curves.png" width="250" style="vertical-align: top; margin-right:20px;" />
 </div>
 
+
+<img src="lowrank/lowrank_reg.png" width="500" style="vertical-align: top;" />
+<p>A comparison of the spike predictions of the closed-form, full-rank model, and low-rank model.</p>
