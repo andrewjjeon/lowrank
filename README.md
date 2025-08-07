@@ -28,19 +28,24 @@ I conducted Regularization and Hyperparameter Tuning Experiments on the Low Rank
 Some motivation for why is that there is a strong need for techniques that minimize the amount of data needed to learn neural population dynamics due to experimental time and resource constraints. The long-term goal that the above paper is working towards is for a model to be able to actively learn the patterns of neurons that have the most informative neural responses to quickly learn the neural population dynamics (brain activity).
 
 This project used experimental data where a region of a mice brain was photostimulated with a laser. Specifically, patterns of neurons were photostimulated and the rest of region neuron's response (spikes) to that stimulation was recorded. 
+<div align="center">
+  <img src="media/spikes_detected.png" width="400" />
+  <p><em>Spikes were determined as signal responses that were 6x greater than the baseline noise of the signal.</em></p>
+</div>
 
-<img src="media/spikes_detected.png" width="400" />
-<p>Spikes were determined as signal responses that were 6x greater than the baseline noise of the signal.</p>
-
-<img src="media/photostim_neurons_map.png" width="400" />
-<p>Here you can see an example pattern of neurons being photostimulated by the neuron.</p>
+<div align="center">
+  <img src="media/photostim_neurons_map.png" width="400" />
+  <p><em>Here you can see an example pattern of neurons being photostimulated by the neuron.</em></p>
+</div>
 
 The project’s active learning technique takes advantage of the low-rank structure of the neural population dynamics to determine the most informative photostimulation patterns. It uses SVD to create low rank autoregressive models that predict neural activity (spikes). These are the models I experimented on. I tuned hyperparameters such as Lambda (L2 Regularization strength), Epochs, Learning Rate, Weight Initialization, k (number of autoregressive time steps used) with cross-validation loops. My best model resulted in a 25% improvement in performance (MSE) over the baselines the team had before I came on.
 <div style="text-align:center">
   <img src="media/mse_improvement.png" width="250" style="vertical-align: top; margin-right:20px;" />
   <img src="media/roc_curves.png" width="250" style="vertical-align: top; margin-right:20px;" />
+  <p><em>Low Rank Model Spike Prediction Performance</em></p>
 </div>
 
-
-<img src="media/lowrank_reg.png" width="500" style="vertical-align: top;" />
-<p>A comparison of the spike predictions of the closed-form, full-rank model, and low-rank model.</p>
+<div align="center">
+  <img src="media/lowrank_reg.png" width="500" style="vertical-align: top;" />
+  <p><em>A comparison of the spike predictions of the closed-form, full-rank model, and low-rank model.</em></p>
+</div>
