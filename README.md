@@ -3,7 +3,8 @@
 
 <h2>1. Introduction</h2>
   I conducted Regularization and Hyperparameter Tuning Experiments on the Low Rank Autoregressive Models used in this paper:
-  <a href="https://arxiv.org/abs/2412.02529" target="_blank">Active Learning of Neural Population Dynamics using two-photon holographic optogenetics</a>
+  <a href="https://arxiv.org/abs/2412.02529" target="_blank">Active Learning of Neural Population Dynamics using two-photon holographic optogenetics</a>.
+  
   Some motivation for why is that there is a strong need for techniques that minimize the amount of data needed to learn neural population dynamics due to experimental time and resource constraints. The long-term goal that the above paper is working towards is for a model to be able to actively learn the patterns of neurons that have the most informative neural responses to quickly learn the neural population dynamics (brain activity).
 
   This project used experimental data where a region of a mice brain was photostimulated with a laser. Specifically, patterns of neurons were photostimulated and the rest of region neuron's response (spikes) to that stimulation was recorded.<br>
