@@ -1,6 +1,47 @@
 #  Regularization, Hyperparameter Tuning of Low Rank Autoregressive Models
 
 
+<h2>1. Introduction</h2>
+  I conducted Regularization and Hyperparameter Tuning Experiments on the Low Rank Autoregressive Models used in this paper:
+  <a href="https://arxiv.org/abs/2412.02529" target="_blank">Active Learning of Neural Population Dynamics using two-photon holographic optogenetics</a>
+  Some motivation for why is that there is a strong need for techniques that minimize the amount of data needed to learn neural population dynamics due to experimental time and resource constraints. The long-term goal that the above paper is working towards is for a model to be able to actively learn the patterns of neurons that have the most informative neural responses to quickly learn the neural population dynamics (brain activity).
+
+  This project used experimental data where a region of a mice brain was photostimulated with a laser. Specifically, patterns of neurons were photostimulated and the rest of region neuron's response (spikes) to that stimulation was recorded.<br>
+
+  <div align="center">
+    <img src="media/spikes_detected.png" width="400" />
+    <p><em>Spikes were determined as signal responses that were 6x greater than the baseline noise of the signal.</em></p>
+  </div>
+
+  <div align="center">
+    <img src="media/photostim_neurons_map.png" width="400" />
+    <p><em>Here you can see an example pattern of neurons being photostimulated by the neuron.</em></p>
+  </div>
+  The project’s active learning technique takes advantage of the low-rank structure of the neural population dynamics to determine the most informative photostimulation patterns. It uses SVD to create low rank autoregressive models that predict neural activity (spikes).
+
+<h2>2. L2 Regularization and Hyperparameter Tuning</h2>
+  These Low Rank Models are the models I was tasked with experimenting on. I used cross validation loops to tune hyperparameters such as... 
+  <ul>
+    <li>Lambda (L2 Regularization strength)</li>
+    <li>Epochs</li>
+    <li>Learning Rate </li>
+    <li>Weight Initialization</li>
+    <li>k (number of autoregressive time steps used to make prediction)</li>
+  </ul>
+  My best model resulted in a 25% improvement in performance (MSE) over the baselines the team had before I came on.
+
+<div style="text-align:center">
+  <img src="media/mse_improvement.png" width="250" style="vertical-align: top; margin-right:20px;" />
+  <img src="media/roc_curves.png" width="250" style="vertical-align: top; margin-right:20px;" />
+  <p><em>Low Rank Model Spike Prediction Performance</em></p>
+</div>
+
+
+<div align="center">
+  <img src="media/lowrank_reg.png" width="500" style="vertical-align: top;" />
+  <p><em>A comparison of the spike predictions of the closed-form, full-rank model, and low-rank model.</em></p>
+</div>
+
 ### Environment Setup and Data Download
 
 To begin on your own machine, clone this repository locally
@@ -20,7 +61,7 @@ After environment setup,
 - Work through `aj_models/BCI_data_processing_aj.ipynb` to process the raw `BCI_xx_xxxxxx.npy` we just downloaded. This notebook will generated a `sample_photostim_xx_spatial_date_xxxxxx.npy` containing our neural photostimulation spike response data.
 - Work through `aj_models/low_rank_ark_model_aj.ipynb` to visualize the data, train the model, and tune the model to your liking.
 
-### Low Rank Autoregressive Model Regularization and Hyperparameter Tuning
+<!-- ### Low Rank Autoregressive Model Regularization and Hyperparameter Tuning
 
 I conducted Regularization and Hyperparameter Tuning Experiments on the Low Rank Autoregressive Models used in this paper:
 [<b>Active Learning of Neural Population Dynamics using two-photon holographic optogenetics</b>](https://arxiv.org/abs/2412.02529)
@@ -48,4 +89,4 @@ The project’s active learning technique takes advantage of the low-rank struct
 <div align="center">
   <img src="media/lowrank_reg.png" width="500" style="vertical-align: top;" />
   <p><em>A comparison of the spike predictions of the closed-form, full-rank model, and low-rank model.</em></p>
-</div>
+</div> -->
